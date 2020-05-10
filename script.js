@@ -1,32 +1,23 @@
-// Credits to Tiffan Rayside (@tmrDevelops) for 
-// educating me about the touchmove event! ♥
+const second = 1000,
+      minute = second * 60,
+      hour = minute * 60,
+      day = hour * 24;
 
-// TODO: debounce scroll event
-$(document).ready(function () {
-    var $scene = $('.js-scene');
-    
-    $(window).on("mousewheel DOMMouseScroll touchmove", function (e) {
-      var scrollingDown = (function () {
-        var delta,
-            compareEvent;
-        
-        if (e.type ==='touchmove') {
-          compareEvent = 'touchmove';
-        } else {
-          compareEvent = 'DOMMouseScroll';
-        }
-        
-        delta = e.type === compareEvent ?
-                e.originalEvent.detail * -40 :
-                e.originalEvent.wheelDelta; 
-        
-        return delta > 0 ? 0 : 1;
-      }());
-  
-      if (scrollingDown) {
-        $scene.addClass('is-over');
-      } else {
-        $scene.removeClass('is-over');
-      }
-    });
-  }); //doc.ready()
+let countDown = new Date('Sep 30, 2020 00:00:00').getTime(),
+    x = setInterval(function() {    
+
+      let now = new Date().getTime(),
+          distance = countDown - now;
+
+      document.getElementById('days').innerText = Math.floor(distance / (day)),
+        document.getElementById('hours').innerText = Math.floor((distance % (day)) / (hour)),
+        document.getElementById('minutes').innerText = Math.floor((distance % (hour)) / (minute)),
+        document.getElementById('seconds').innerText = Math.floor((distance % (minute)) / second);
+
+      //do something later when date is reached
+      //if (distance < 0) {
+      //  clearInterval(x);
+      //  'IT'S MY BIRTHDAY!;
+      //}
+
+    }, second)
