@@ -1,4 +1,4 @@
-const birthday = "May 11, 2020 08:57:50";
+const birthday = "May 11, 2020 09:20:00";
 
 const second = 1000,
   minute = second * 60,
@@ -30,6 +30,7 @@ $(document).ready(function() {
       document.getElementById("minutes").innerText = 0;
       document.getElementById("seconds").innerText = 0;
       $('#countdown').remove();
+      window.location.assign("cake.html");
       }
   }, second); //setInterval()
 
