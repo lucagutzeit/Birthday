@@ -1,10 +1,13 @@
+const birthday = "May 11, 2020 08:57:50";
+
 const second = 1000,
   minute = second * 60,
   hour = minute * 60,
   day = hour * 24;
 
-let countDown = new Date("May 11, 2020 12:00:00").getTime(),
-  x = setInterval(function () {
+$(document).ready(function() {
+  let countDown = new Date(birthday).getTime();
+  let x = setInterval(function () {
     let now = new Date().getTime(),
       distance = countDown - now;
 
@@ -20,9 +23,14 @@ let countDown = new Date("May 11, 2020 12:00:00").getTime(),
       (distance % minute) / second
     );
 
-    //do something later when date is reached
-    //if (distance < 0) {
-    //  clearInterval(x);
-    //  'IT'S MY BIRTHDAY!;
-    //}
-  }, second);
+    if (distance <= 0) {
+      clearInterval(x);
+      document.getElementById("days").innerText = 0;
+      document.getElementById("hours").innerText = 0;
+      document.getElementById("minutes").innerText = 0;
+      document.getElementById("seconds").innerText = 0;
+      $('#countdown').remove();
+      }
+  }, second); //setInterval()
+
+}); //doc.ready()
